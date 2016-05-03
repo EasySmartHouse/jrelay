@@ -56,5 +56,6 @@ public class RelayLockTest extends EasyMockSupport {
                 .isTrue();
 
         first.unlock();
+		
     }
 }
