@@ -709,6 +709,37 @@ public class Relay {
     }
 
     /**
+     * Set new drivers classes to be used by relay. Classes given in the argument shall extend
+     * {@link RelayDriver} interface and should have public default constructor, so instance can be
+     * created by reflection.<br>
+     * <br>
+     * <b>This method is not thread-safe!</b>
+     *
+     * @param driverClasses new video drivers classes to use
+     * @throws IllegalArgumentException when argument is null
+     */
+    public static void setDrivers(Class<? extends RelayDriver>... driverClasses) {
+
+        if (driverClasses == null) {
+            throw new IllegalArgumentException("Relay driver classes cannot be null!");
+        }
+        resetDriver();
+
+        try {
+            RelayCompositeDriver compositeDriver = new RelayCompositeDriver();
+            for (int i = 0; i < driverClasses.length; i++) {
+                compositeDriver.add(driverClasses[i].newInstance());
+            }
+
+            driver = compositeDriver;
+        } catch (InstantiationException e) {
+            throw new RelayException(e);
+        } catch (IllegalAccessException e) {
+            throw new RelayException(e);
+        }
+    }
+
+    /**
      * Reset relay driver.<br>
      * <br>
      * <b>This method is not thread-safe!</b>
