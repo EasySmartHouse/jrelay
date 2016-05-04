@@ -1,7 +1,10 @@
 package com.github.jrelay.examples;
 
 import com.github.jrelay.Relay;
+import com.github.jrelay.jssc.JsscRelayDriver;
 import com.github.jrelay.usbhid.UsbHidRelayDriver;
+
+import java.util.List;
 
 /**
  * Created by nightingale on 03.05.16.
@@ -9,25 +12,23 @@ import com.github.jrelay.usbhid.UsbHidRelayDriver;
 public class ManyRelaysExample {
 
     static {
-        // set driver
-        Relay.setDriver(UsbHidRelayDriver.class);
+        // set drivers
+        Relay.setDrivers(UsbHidRelayDriver.class, JsscRelayDriver.class);
     }
 
-    public static void main(String[] args) {
-        // get default relay
-        Relay relay = Relay.getDefault();
-
-        //open relay
-        relay.open();
-
-        //wait...
-        try {
+    public static void main(String[] args) throws Exception{
+        // get all available relays
+        List<Relay> relays = Relay.getRelays();
+        for(Relay relay: relays){
+            //open relay
+            relay.open();
+            //wait
             Thread.sleep(2000l);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            //relay close
+            relay.close();
+            //wait again..
+            Thread.sleep(2000l);
         }
-
-        relay.close();
     }
 
 }
