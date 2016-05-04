@@ -12,7 +12,7 @@ public class UsbHidRelayDriverExample {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         // get default relay
         Relay relay = Relay.getDefault();
 
@@ -20,12 +20,9 @@ public class UsbHidRelayDriverExample {
         relay.open();
 
         //wait...
-        try {
-            Thread.sleep(2000l);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000l);
 
+        //close relay
         relay.close();
     }
 }
