@@ -9,7 +9,7 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>jrelay Parent POM</name>
+    <name>jrelay parent POM</name>
     <description>This is jrelay root POM</description>
     <url>https://github.com/EasySmartHouse/jrelay</url>
 

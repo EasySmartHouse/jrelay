@@ -12,7 +12,7 @@
     <artifactId>drivers</artifactId>
     <packaging>pom</packaging>
 
-    <name>Relay drivers</name>
+    <name>Relay drivers parent POM</name>
     <description>Parent POM for relay drivers set</description>
     <modules>
         <module>usbhid</module>

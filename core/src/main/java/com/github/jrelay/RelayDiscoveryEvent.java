@@ -59,4 +59,13 @@ public class RelayDiscoveryEvent extends EventObject {
         return type;
     }
 
+    public String toString(){
+        StringBuilder strBuilder = new StringBuilder();
+        strBuilder.append("Event: ")
+                .append(getType() == ADDED ? "ADDED" : "REMOVED")
+                .append(", source: ")
+                .append(getRelay().getDevice().getName());
+        return strBuilder.toString();
+    }
+
 }

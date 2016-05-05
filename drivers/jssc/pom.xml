@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jssc</artifactId>
+    <artifactId>driver-jssc</artifactId>
 
     <name>JSSC relay driver</name>
     <description>Driver to be used for COM port relay</description>
@@ -23,7 +23,7 @@
 
         <dependency>
             <groupId>com.github.jrelay</groupId>
-            <artifactId>jrelay</artifactId>
+            <artifactId>jrelay-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

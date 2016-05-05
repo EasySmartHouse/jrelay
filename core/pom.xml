@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jrelay</artifactId>
+    <artifactId>jrelay-core</artifactId>
     <packaging>bundle</packaging>
 
-    <name>jrelay</name>
+    <name>jrelay core</name>
     <description>This library allows you to use your relays connected to PC directly from Java. It's compatible with most operating systems (Windows, Linux, MacOS).</description>
     
     <repositories>
