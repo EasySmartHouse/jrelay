@@ -25,4 +25,13 @@ public class RelayEvent extends EventObject {
         return type;
     }
 
+    public String toString(){
+        StringBuilder strBuilder = new StringBuilder();
+        strBuilder.append("Event: ")
+                .append(getType().name())
+                .append(", source: ")
+                .append(getSource().getDevice().getName());
+        return strBuilder.toString();
+    }
+
 }

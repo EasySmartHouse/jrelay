@@ -6,10 +6,12 @@ import by.creepid.jusbrelay.UsbRelayException;
 import by.creepid.jusbrelay.UsbRelayManager;
 import com.github.jrelay.RelayDevice;
 import com.github.jrelay.RelayDriver;
+import com.github.jrelay.RelayException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -68,20 +70,22 @@ public class UsbHidRelayDriver implements RelayDriver {
      */
     @Override
     public List<RelayDevice> getDevices() {
-        List<RelayDevice> devices = new ArrayList<RelayDevice>();
-
-        UsbRelayDeviceInfo[] deviceInfos = manager.deviceEnumerate();
-        for (int i = 0; i < deviceInfos.length; i++) {
+        try {
+            List<RelayDevice> devices = new ArrayList<RelayDevice>();
+            UsbRelayDeviceInfo[] deviceInfos = manager.deviceEnumerate();
+            for (int i = 0; i < deviceInfos.length; i++) {
                 UsbRelayDeviceInfo deviceInfo = deviceInfos[i];
 
-                int channels =  deviceInfo.getDeviceType().getChannels();
-                for (int ch = 0; ch < channels; ch++){
+                int channels = deviceInfo.getDeviceType().getChannels();
+                for (int ch = 0; ch < channels; ch++) {
                     devices.add(new UsbHidRelayDevice(deviceInfo, manager, ch));
                 }
             }
-
-
-        return devices;
+            return devices;
+        }catch(Exception ex){
+            LOG.error("UsbHidRelayDriver error", ex);
+            return Collections.EMPTY_LIST;
+        }
     }
 
     /**
