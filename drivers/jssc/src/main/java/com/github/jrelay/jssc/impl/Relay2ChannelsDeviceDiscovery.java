@@ -25,34 +25,37 @@ public class Relay2ChannelsDeviceDiscovery implements DeviceDiscovery<SerialPort
 
     @Override
     public boolean isDeviceAvailable(SerialPort port) {
-        try {
 
-            SerialPortHelper.initPort(port, SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+            try {
 
-            for (int channel = 0; channel < getChannelsCount(); channel++) {
+                SerialPortHelper.initPort(port, SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 
-                byte[] checkCmd = JsscRelayCommandBuilder.INSTANCE_4CH.getControlCommand(ControlCommand.READING_STATUS, channel);
+                synchronized(port) {
+                    for (int channel = 0; channel < getChannelsCount(); channel++) {
 
-                try {
-                    port.writeBytes(checkCmd);
-                    byte[] response = port.readBytes(8, READ_TIMEOUT);
+                        byte[] checkCmd = JsscRelayCommandBuilder.INSTANCE_4CH.getControlCommand(ControlCommand.READING_STATUS, channel);
 
-                    if (!Arrays.equals(JsscRelayCommandBuilder.READING_STATE_RESPONSE, response)) {
-                        return false;
+                        try {
+                            port.writeBytes(checkCmd);
+                            byte[] response = port.readBytes(8, READ_TIMEOUT);
+
+                            if (!Arrays.equals(JsscRelayCommandBuilder.READING_STATE_RESPONSE, response)) {
+                                return false;
+                            }
+                        } catch (SerialPortException ex) {
+
+                            return false;
+                        } catch (SerialPortTimeoutException ex) {
+
+                            return false;
+                        }
                     }
-                } catch (SerialPortException ex) {
-
-                    return false;
-                } catch (SerialPortTimeoutException ex) {
-
-                    return false;
                 }
-
+            } finally {
+                SerialPortHelper.closePort(port);
             }
-        } finally {
-            SerialPortHelper.closePort(port);
-        }
-        return true;
+            return true;
+
     }
 
     public int getChannelsCount() {

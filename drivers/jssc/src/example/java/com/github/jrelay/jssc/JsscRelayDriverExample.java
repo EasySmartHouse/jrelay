@@ -10,7 +10,8 @@ import java.util.List;
 public class JsscRelayDriverExample {
 
     static{
-        Relay.setDriver(JsscRelayDriver.class);
+        JsscRelayDriver driver = new JsscRelayDriver(true);
+        Relay.setDriver(driver);
     }
 
 

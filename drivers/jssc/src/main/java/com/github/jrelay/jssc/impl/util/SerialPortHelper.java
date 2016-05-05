@@ -19,12 +19,13 @@ public class SerialPortHelper {
 
     public static void initPort(SerialPort port, int baudRate, int dataBits, int stopBits, int parity) {
         try {
-            if (!port.isOpened()) {
-                port.openPort();
+            synchronized (port) {
+                if (!port.isOpened()) {
+                    port.openPort();
+                }
+
+                port.setParams(baudRate, dataBits, stopBits, parity);
             }
-
-            port.setParams(baudRate, dataBits, stopBits, parity);
-
         } catch (SerialPortException ex) {
             LOG.error(ex.getMessage());
         }
@@ -32,10 +33,11 @@ public class SerialPortHelper {
 
     public static void closePort(SerialPort port) {
         try {
-            if (port.isOpened()) {
-                port.closePort();
+            synchronized (port) {
+                if (port.isOpened()) {
+                    port.closePort();
+                }
             }
-
         } catch (SerialPortException ex) {
             LOG.error(ex.getMessage());
         }

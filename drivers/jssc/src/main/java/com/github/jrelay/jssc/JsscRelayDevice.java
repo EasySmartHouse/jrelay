@@ -78,10 +78,10 @@ public class JsscRelayDevice implements RelayDevice {
 
         init();
 
-        synchronized(this) {
+        synchronized(serialPort) {
             try {
                 byte[] cmd = JsscRelayCommandBuilder.INSTANCE_4CH.getControlCommand(ControlCommand.OPEN, channel);
-                this.serialPort.writeBytes(cmd);
+                serialPort.writeBytes(cmd);
 
                 byte[] actualResp = serialPort.readBytes(8, READ_TIMEOUT);
                 byte[] expectedResp = JsscRelayCommandBuilder.INSTANCE_4CH.getReturnCommand(CommandReturn.OPEN, channel);
@@ -108,7 +108,7 @@ public class JsscRelayDevice implements RelayDevice {
 
         LOG.debug(String.format("Closing UsbHidRelay device channel %s", getName()));
 
-        synchronized(this) {
+        synchronized(serialPort) {
             try {
                 byte[] cmd = JsscRelayCommandBuilder.INSTANCE_4CH.getControlCommand(ControlCommand.CLOSE, channel);
                 this.serialPort.writeBytes(cmd);
@@ -139,7 +139,7 @@ public class JsscRelayDevice implements RelayDevice {
 
         close();
 
-        synchronized(this) {
+        synchronized(serialPort) {
             try {
                 serialPort.closePort();
             } catch (SerialPortException ex) {
@@ -156,5 +156,9 @@ public class JsscRelayDevice implements RelayDevice {
     @Override
     public boolean isOpen() {
         return open.get();
+    }
+
+    public SerialPort getSerialPort(){
+        return serialPort;
     }
 }
