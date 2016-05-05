@@ -43,6 +43,21 @@ public class RelayLockTest extends EasyMockSupport {
         Assertions.assertThat(lock.isLocked())
                 .isFalse();
     }
+	
+	@Test
+    public void testLock2() throws Exception {
+
+        RelayLock first = new RelayLock(relay);
+        RelayLock second = new RelayLock(relay);
+
+        first.lock();
+
+        Assertions.assertThat(second.isLocked())
+                .isTrue();
+
+        first.unlock();
+		
+    }
 
 
 }
