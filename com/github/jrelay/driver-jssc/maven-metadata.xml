@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>com.github.jrelay</groupId>
-  <artifactId>jrelay-core</artifactId>
+  <artifactId>driver-jssc</artifactId>
   <versioning>
     <versions>
       <version>0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20160508173907</lastUpdated>
+    <lastUpdated>20160508174048</lastUpdated>
   </versioning>
 </metadata>
