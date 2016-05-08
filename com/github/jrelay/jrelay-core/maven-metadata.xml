@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>com.github.jrelay</groupId>
-  <artifactId>many-relays</artifactId>
+  <artifactId>jrelay-core</artifactId>
   <versioning>
     <versions>
       <version>0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20160508172934</lastUpdated>
+    <lastUpdated>20160508173612</lastUpdated>
   </versioning>
 </metadata>
