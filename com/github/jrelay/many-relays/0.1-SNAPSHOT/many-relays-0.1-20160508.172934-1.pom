@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>jrelay discovery listener example</name>
-    <artifactId>relay-discovery-listener</artifactId>
+    <name>jrelay many relays example</name>
+    <artifactId>many-relays</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -34,6 +34,4 @@
         </dependency>
 
     </dependencies>
-
-
 </project>
