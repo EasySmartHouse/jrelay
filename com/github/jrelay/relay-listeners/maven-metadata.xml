@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.github.jrelay</groupId>
+  <artifactId>relay-listeners</artifactId>
+  <versioning>
+    <versions>
+      <version>0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20160508193558</lastUpdated>
+  </versioning>
+</metadata>
