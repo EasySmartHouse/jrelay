@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>jrelay device listener example</name>
-    <artifactId>relay-listeners</artifactId>
+    <name>jrelay discovery listener example</name>
+    <artifactId>relay-discovery-listener</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
