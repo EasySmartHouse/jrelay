@@ -9,22 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>driver-usbhid</artifactId>
-    <packaging>bundle</packaging>
+    <artifactId>driver-jssc</artifactId>
 
-    <name>USB HID relay driver</name>
-    <description>Driver to be used for USB HID relay</description>
+    <name>JSSC relay driver</name>
+    <description>Driver to be used for COM port relay</description>
 
     <properties>
-        <jusbrelay.version>0.1</jusbrelay.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jssc.version>2.8.0</jssc.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>com.github.jrelay</groupId>
@@ -33,9 +28,15 @@
         </dependency>
 
         <dependency>
-            <groupId>by.creepid</groupId>
-            <artifactId>jusbrelay</artifactId>
-            <version>${jusbrelay.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scream3r</groupId>
+            <artifactId>jssc</artifactId>
+            <version>${jssc.version}</version>
         </dependency>
 
     </dependencies>
@@ -44,14 +45,8 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -67,24 +62,17 @@
                             *,
                         </Import-Package>
                         <Export-Package>
-                            com.github.jrelay.usbhid*,
+                            com.github.jrelay.jssc*,
                         </Export-Package>
+                        <Private-Package>
+                            com.github.jrelay.jssc.impl,
+                        </Private-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>jusbrelay-mvn-repo</id>
-            <url>https://raw.github.com/creepid/jusbrelay/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
 
 
 </project>
