@@ -3,62 +3,42 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>jrelay-parent</artifactId>
+        <artifactId>drivers</artifactId>
         <groupId>com.github.jrelay</groupId>
         <version>0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jrelay-core</artifactId>
+    <artifactId>driver-usbhid</artifactId>
     <packaging>bundle</packaging>
 
-    <name>jrelay core</name>
-    <description>This library allows you to use your relays connected to PC directly from Java. It's compatible with most operating systems (Windows, Linux, MacOS).</description>
-    
-    <repositories>
-        <repository>
-            <id>sonatype</id>
-            <name>Sonatype OSS Snapshots Repository</name>
-            <url>http://oss.sonatype.org/content/groups/public</url>
-        </repository>
-    </repositories>
+    <name>USB HID relay driver</name>
+    <description>Driver to be used for USB HID relay</description>
+
+    <properties>
+        <jusbrelay.version>0.1</jusbrelay.version>
+    </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- unit tests -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
+            <groupId>com.github.jrelay</groupId>
+            <artifactId>jrelay-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jayway.awaitility</groupId>
-            <artifactId>awaitility</artifactId>
-            <scope>test</scope>
+            <groupId>by.creepid</groupId>
+            <artifactId>jusbrelay</artifactId>
+            <version>${jusbrelay.version}</version>
         </dependency>
 
     </dependencies>
-
 
     <build>
         <plugins>
@@ -78,10 +58,17 @@
                     <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -94,31 +81,27 @@
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Bundle-DocURL>${project.url}</Bundle-DocURL>
                         <Import-Package>
-                            ch.qos.logback.*;resolution:=optional,
                             *,
                         </Import-Package>
                         <Export-Package>
-                            com.github.jrelay,
+                            com.github.jrelay.usbhid*,
                         </Export-Package>
-                        <Private-Package>
-                            com.github.jrelay.dummy,
-                            com.github.jrelay.dummy.*,
-                            com.github.jrelay.task.*,
-                        </Private-Package>
-                        <Include-Resources>{maven-resources}</Include-Resources>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
-    <distributionManagement>
+    <repositories>
         <repository>
-            <id>internal.repo</id>
-            <name>Temporary Staging Repository</name>
-            <url>file://${project.build.directory}/mvn-repo</url>
+            <id>jusbrelay-mvn-repo</id>
+            <url>https://raw.github.com/creepid/jusbrelay/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
-    </distributionManagement>
+    </repositories>
 
 
 </project>
