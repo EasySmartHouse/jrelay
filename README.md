@@ -2,7 +2,7 @@
 This library allows you to use your relay connected to computer directly from Java. It's designed to abstract commonly used relay's drivers and has very simple API.
 
 ## Rationale
-Today we have a huge amount of various relay on the market with cardinal differences in hardware and driver part, that often used as a switch for the home devices. This way we may use relay to control almost every device in our home and jrelay API was created to remove the burden of situations where you have to rewrite your code because of relay replacing, but instead you can simply switch the driver class to different one.
+Today we have a huge amount of various relay on the market with cardinal differences in hardware and driver's part, that often used as a switch for the home devices. This way we may use relay to control almost every device in our home and jrelay API was created to remove the burden of situations where you have to rewrite your code because of relay replacing, but instead you can simply switch the driver class to different one.
 
 ## Features
 * Simple, thread-safe and non-blocking API,
@@ -22,7 +22,7 @@ Today we have a huge amount of various relay on the market with cardinal differe
 
 The latest stable version is available in EasySmartHouse github repo:
 
-1. Add repository:
+Add repository:
 ```xml
 <repository>
 	<id>jrelay-mvn-repo</id>
@@ -34,7 +34,7 @@ The latest stable version is available in EasySmartHouse github repo:
 </repository>
 ```
 
-2. Add core dependency:
+Add core dependency:
 ```xml
 <dependency>
 	<groupId>com.github.jrelay</groupId>
@@ -43,7 +43,7 @@ The latest stable version is available in EasySmartHouse github repo:
 </dependency>
 ```
 
-3. Add desired driver:
+Add desired driver:
 ```xml
 <dependency>
 	<groupId>com.github.jrelay</groupId>
